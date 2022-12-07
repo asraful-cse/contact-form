@@ -51,14 +51,18 @@ function App() {
     setIsOpen(false);
   }
   return (
-    <div className="container pt-5 ">
+    <div className=" pt-5 bg-cl pb-5 ">
       <div className="row justify-content-sm-center pt-5">
-        <div className="col-sm-6 shadow rounded pb-3 bg-info  ">
+        <div className="col-sm-6 shadow rounded pb-3 bg-cl  ">
           <h1 className="text-center pt-3 text-white">Contact Form</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <label className="col-form-label">Name:</label>
+              <label className="col-form-label">Name:</label> <br/>
+              {errors.name && (
+                <small className="text-danger">{errors.name.message}</small>
+              )}
               <input
+              placeholder="Name"
                 type="text"
                 className={`form-control ${errors.name && "invalid"}`}
                 {...register("name", {
@@ -80,15 +84,17 @@ function App() {
                   trigger("name");
                 }}
               />
-              {errors.name && (
-                <small className="text-danger">{errors.name.message}</small>
-              )}
+          
             </div>
 
             <div className="form-group">
-              <label className="col-form-label">Email:</label>
+              <label className="col-form-label">Email:</label> <br/>
+              {errors.email && (
+                <small className="text-danger">{errors.email.message}</small>
+              )}
               <input
                 type="text"
+                placeholder="Enter your email address"
                 className={`form-control ${errors.email && "invalid"}`}
                 {...register("email", {
                   required: "Email is Required",
@@ -101,14 +107,16 @@ function App() {
                   trigger("email");
                 }}
               />
-              {errors.email && (
-                <small className="text-danger">{errors.email.message}</small>
-              )}
+           
             </div>
             <div className="form-group">
-              <label className="col-form-label">Phone:</label>
+              <label className="col-form-label">Phone:</label> <br/>
+              {errors.phone && (
+                <small className="text-danger">{errors.phone.message}</small>
+              )}
               <input
                 type="text"
+                placeholder="Enter your bd phone no."
                 className={`form-control ${errors.phone && "invalid"}`}
                 {...register("phone", {
                   required: "Phone is Required",
@@ -122,13 +130,15 @@ function App() {
                   trigger("phone");
                 }}
               />
-              {errors.phone && (
-                <small className="text-danger">{errors.phone.message}</small>
-              )}
+         
             </div>
             <div className="form-group">
-              <label className="col-form-label">Message:</label>
+              <label className="col-form-label">Message:</label> <br/>
+              {errors.message && (
+                <small className="text-danger">{errors.message.message}</small>
+              )}
               <textarea
+               placeholder="Enter your message"
                 className={`form-control ${errors.message && "invalid"}`}
                 {...register("message", {
                   required: "Message is Required",
@@ -145,15 +155,13 @@ function App() {
                   trigger("message");
                 }}
               ></textarea>
-              {errors.message && (
-                <small className="text-danger">{errors.message.message}</small>
-              )}
+          
             </div>
             <div className="d-flex justify-content-center">
               <input
                 onClick={openModal}
                 type="submit"
-                className="btn  btn-primary my-3"
+                className="btn  btn-info my-3 "
                 value="Send message"
               />
             </div>

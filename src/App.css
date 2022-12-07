@@ -1,11 +1,15 @@
 .invalid {
-  border:1px solid red !important;
+  /* border:1px solid red !important; */
  }
- input, textarea {
+ /* input, textarea {
   outline: none !important;
   box-shadow: none !important; 
-}
+} */
 
-body{
-  background: lightcyan;
+
+
+.bg-cl{
+  background: linear-gradient(127deg, rgb(193, 225, 193), rgba(0,255,0,0) 70.71%),
+  linear-gradient(127deg, rgba(224, 94, 146, 0.866), rgba(0,255,0,0) 70.71%),
+  linear-gradient(336deg, rgba(84, 84, 114, 0.64), rgba(0,0,255,0) 70.71%);
 }
