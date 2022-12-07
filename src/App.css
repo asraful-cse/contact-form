@@ -6,6 +6,6 @@
   box-shadow: none !important; 
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body{
+  background: lightcyan;
+}
