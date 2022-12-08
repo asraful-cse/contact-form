@@ -19,6 +19,7 @@ const customStyles = {
 
 function App() {
   const [data, setData] = useState("");
+  const [disable, setDisable] = useState(0)
   const {
     register,
     handleSubmit,
@@ -31,6 +32,7 @@ function App() {
     console.log(data);
     setData(data);
     reset();
+    // setDisable(true)
   };
 
   // console.log(watch());
@@ -49,35 +51,36 @@ function App() {
 
   function closeModal() {
     setIsOpen(false);
+    // setDisable(false)
   }
   return (
-    <div className=" pt-5 bg-cl pb-5 ">
+    <div className=" pt-5 bg-cl pb-5 p-2">
       <div className="row justify-content-sm-center pt-5">
         <div className="col-sm-6 shadow rounded pb-3 bg-cl  ">
           <h1 className="text-center pt-3 text-white">Contact Form</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <label className="col-form-label">Name:</label> <br />
+              <label className="col-form-label">
+                <strong className="text-danger">*</strong> Name:
+              </label>{" "}
+              <br />
               {errors.name && (
                 <small className="text-danger">{errors.name.message}</small>
               )}
               <input
-                placeholder="Name"
+                placeholder="Enter your name"
                 type="text"
                 className={`form-control ${errors.name && "invalid"}`}
                 {...register("name", {
-                  required: "Name is Required",
-                  minLength: {
-                    value: 3,
-                    message: "Minimum Required length is 3",
-                  },
+                  required: "Name is Required example:- Asad",
+
                   maxLength: {
                     value: 30,
-                    message: "Maximum allowed length is 30",
+                    message: "Maximum allowed length is 30 words",
                   },
                   pattern: {
                     value: /^[a-zA-Z]+([._]?[a-zA-Z]+)*$/,
-                    message: "Only (a-z) are allowed",
+                    message: "Only (a-z) words are allowed",
                   },
                 })}
                 onKeyUp={() => {
@@ -87,7 +90,10 @@ function App() {
             </div>
 
             <div className="form-group">
-              <label className="col-form-label">Email:</label> <br />
+              <label className="col-form-label">
+                <strong className="text-danger">*</strong> Email:
+              </label>{" "}
+              <br />
               {errors.email && (
                 <small className="text-danger">{errors.email.message}</small>
               )}
@@ -96,31 +102,37 @@ function App() {
                 placeholder="Enter your email address"
                 className={`form-control ${errors.email && "invalid"}`}
                 {...register("email", {
-                  required: "Email is Required",
+                  required:
+                    "Email is Required example :- abc@gmail.com or abc@bd.info",
                   pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    value:
+                      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[com]{3,}|[info]{4,}$/i,
+
                     message: "Invalid email address",
                   },
                 })}
-                onKeyDown={() => {
+                onKeyUp={() => {
                   trigger("email");
                 }}
               />
             </div>
             <div className="form-group">
-              <label className="col-form-label">Phone:</label> <br />
+              <label className="col-form-label">
+                <strong className="text-danger">*</strong> Mobile Number:
+              </label>{" "}
+              <br />
               {errors.phone && (
                 <small className="text-danger">{errors.phone.message}</small>
               )}
               <input
                 type="text"
-                placeholder="Enter your bd phone no."
+                placeholder="Enter your bangladesh mobile no."
                 className={`form-control ${errors.phone && "invalid"}`}
                 {...register("phone", {
-                  required: "Phone is Required",
+                  required:
+                    "Mobile No. is Required example:- +8801921615651 or 01921615651 bangladesh mobile no.",
                   pattern: {
-                    value:
-                      /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+                    value: /^(?:\+88|88)?(01[3-9]\d{8})$/,
                     message: "Invalid phone no",
                   },
                 })}
@@ -130,7 +142,10 @@ function App() {
               />
             </div>
             <div className="form-group">
-              <label className="col-form-label">Message:</label> <br />
+              <label className="col-form-label">
+                <strong className="text-danger">*</strong> Message:
+              </label>{" "}
+              <br />
               {errors.message && (
                 <small className="text-danger">{errors.message.message}</small>
               )}
@@ -138,14 +153,10 @@ function App() {
                 placeholder="Enter your message"
                 className={`form-control ${errors.message && "invalid"}`}
                 {...register("message", {
-                  required: "Message is Required",
+                  required: "Message is Required at least 80 characters",
                   minLength: {
-                    value: 0,
-                    message: "Minimum Required length is 0",
-                  },
-                  maxLength: {
                     value: 80,
-                    message: "Maximum allowed length is 80 ",
+                    message: "Minimum Required length is 80",
                   },
                 })}
                 onKeyUp={() => {
@@ -153,12 +164,14 @@ function App() {
                 }}
               ></textarea>
             </div>
+
             <div className="d-flex justify-content-center">
               <input
                 onClick={openModal}
                 type="submit"
-                className="btn  btn-info my-3 "
+                className="btn btn-info my-3 "
                 value="Send message"
+                disabled={disable}
               />
             </div>
           </form>
