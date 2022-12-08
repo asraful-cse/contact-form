@@ -11,7 +11,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     // height:"100px",
-    width:"400px",
+    width: "400px",
     transform: "translate(-50%, -50%)",
     backgroundColor: "lightgray",
   },
@@ -57,12 +57,12 @@ function App() {
           <h1 className="text-center pt-3 text-white">Contact Form</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <label className="col-form-label">Name:</label> <br/>
+              <label className="col-form-label">Name:</label> <br />
               {errors.name && (
                 <small className="text-danger">{errors.name.message}</small>
               )}
               <input
-              placeholder="Name"
+                placeholder="Name"
                 type="text"
                 className={`form-control ${errors.name && "invalid"}`}
                 {...register("name", {
@@ -84,11 +84,10 @@ function App() {
                   trigger("name");
                 }}
               />
-          
             </div>
 
             <div className="form-group">
-              <label className="col-form-label">Email:</label> <br/>
+              <label className="col-form-label">Email:</label> <br />
               {errors.email && (
                 <small className="text-danger">{errors.email.message}</small>
               )}
@@ -103,14 +102,13 @@ function App() {
                     message: "Invalid email address",
                   },
                 })}
-                onKeyUp={() => {
+                onKeyDown={() => {
                   trigger("email");
                 }}
               />
-           
             </div>
             <div className="form-group">
-              <label className="col-form-label">Phone:</label> <br/>
+              <label className="col-form-label">Phone:</label> <br />
               {errors.phone && (
                 <small className="text-danger">{errors.phone.message}</small>
               )}
@@ -130,15 +128,14 @@ function App() {
                   trigger("phone");
                 }}
               />
-         
             </div>
             <div className="form-group">
-              <label className="col-form-label">Message:</label> <br/>
+              <label className="col-form-label">Message:</label> <br />
               {errors.message && (
                 <small className="text-danger">{errors.message.message}</small>
               )}
               <textarea
-               placeholder="Enter your message"
+                placeholder="Enter your message"
                 className={`form-control ${errors.message && "invalid"}`}
                 {...register("message", {
                   required: "Message is Required",
@@ -155,7 +152,6 @@ function App() {
                   trigger("message");
                 }}
               ></textarea>
-          
             </div>
             <div className="d-flex justify-content-center">
               <input
@@ -178,21 +174,25 @@ function App() {
           contentLabel="Example Modal"
         >
           {data.name ? (
-            <div>
-              <h1>Thank you {data.name}</h1>{" "}
-              <button className="btn btn-danger" onClick={closeModal}>
-                close
-              </button>
+            <div className="">
+              <h1 className="pb-5">Thank you {data.name}</h1>{" "}
+              <div className=" d-flex justify-content-center">
+                <button className="btn btn-info" onClick={closeModal}>
+                  OK
+                </button>
+              </div>
             </div>
           ) : (
             <div>
-              <strong className="text-danger">
+              <strong className="text-danger d-flex justify-content-center">
                 Please fill the required fields
               </strong>
               <br />
-              <button className="btn btn-danger" onClick={closeModal}>
-                close
-              </button>
+              <div className=" d-flex justify-content-center pt-5">
+                <button className="btn btn-danger" onClick={closeModal}>
+                  Close
+                </button>
+              </div>
             </div>
           )}
         </Modal>
