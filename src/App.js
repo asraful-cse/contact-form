@@ -147,7 +147,9 @@ function App() {
                 }}
               />
             </div>
-            <div className="form-group">
+    
+
+             <div className="form-group">
               <label className="col-form-label">
                 <strong className="text-danger">*</strong> Message:
               </label>{" "}
@@ -160,20 +162,25 @@ function App() {
                 className={`form-control ${errors.message && "invalid"}`}
                 {...register("message", {
                   required: "Message is Required at least 80 characters",
+                  
                   minLength: {
                     value: 80,
-                    message: "Minimum Required length is 80",
+                    message: "Minimum Required length is 80 characters",
                   },
+                  // pattern: {
+                  //   value: /^[a-zA-Z]+([._]?[a-zA-Z]+)*$/,
+                  //   message: "Only (a-z) words are allowed",
+                  // },
                 })}
                 onKeyUp={() => {
                   trigger("message");
                 }}
               ></textarea>
-            </div>
+            </div> 
 
             <div className="d-flex justify-content-center">
               <input
-                className="btn btn-info my-3 "
+                className={`btn btn-secondary my-3 ${isValid && 'btn btn-info'}`}
                 type="submit"
                 value="Submit"
                 disabled={!isValid}
