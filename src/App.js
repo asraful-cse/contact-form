@@ -19,25 +19,32 @@ const customStyles = {
 
 function App() {
   const [data, setData] = useState("");
-  const [disable, setDisable] = useState(0)
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
     trigger,
-  } = useForm();
+  } = useForm({ mode: "onTouched" });
 
   const onSubmit = (data) => {
     console.log(data);
     setData(data);
     reset();
-    // setDisable(true)
   };
 
-  // console.log(watch());
+  // watch events------------
+  const name = watch("name");
+  const email = watch("email");
+  const phone = watch("phone");
+  const message = watch("message");
 
-  // console.log(errors.name)
+  // console.log(name, email, phone, message);
+
+  // handle disabled submit------------
+  const isValid = name && email && phone && message;
+
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -51,7 +58,6 @@ function App() {
 
   function closeModal() {
     setIsOpen(false);
-    // setDisable(false)
   }
   return (
     <div className=" pt-5 bg-cl pb-5 p-2">
@@ -167,11 +173,11 @@ function App() {
 
             <div className="d-flex justify-content-center">
               <input
-                onClick={openModal}
-                type="submit"
                 className="btn btn-info my-3 "
-                value="Send message"
-                disabled={disable}
+                type="submit"
+                value="Submit"
+                disabled={!isValid}
+                onClick={openModal}
               />
             </div>
           </form>
