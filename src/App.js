@@ -17,13 +17,32 @@ const customStyles = {
   },
 };
 
+let swear = [
+  "arse",
+  "ass",
+  "asshole",
+  "bastard",
+  "bitch",
+  "bollocks",
+  "bugger",
+  "bullshit",
+  "crap",
+  "damn",
+  "frigger",
+];
+
 function App() {
   const [data, setData] = useState("");
+  const [badWordFind, setBadWordFind] = useState(false);
+  const [toggleName, setToggleName] = useState(false);
+  const [toggleEmail, setToggleEmail] = useState(false);
+  const [togglePhone, setTogglePhone] = useState(false);
+  const [toggleMessage, setToggleMessage] = useState(false);
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
+    // watch,
+    formState: { errors, isValid },
     reset,
     trigger,
   } = useForm({ mode: "onTouched" });
@@ -31,19 +50,9 @@ function App() {
   const onSubmit = (data) => {
     console.log(data);
     setData(data);
+    openModal();
     reset();
   };
-
-  // watch events------------
-  const name = watch("name");
-  const email = watch("email");
-  const phone = watch("phone");
-  const message = watch("message");
-
-  // console.log(name, email, phone, message);
-
-  // handle disabled submit------------
-  const isValid = name && email && phone && message;
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -59,6 +68,38 @@ function App() {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const toggleHandlerName = () => {
+    setToggleName(!toggleName);
+  };
+  const toggleHandlerEmail = () => {
+    setToggleEmail(!toggleEmail);
+  };
+
+  const toggleHandlerPhone = () => {
+    setTogglePhone(!togglePhone);
+  };
+  const toggleHandlerMessage = () => {
+    setToggleMessage(!toggleMessage);
+  };
+  // badword handle -----------------------------------
+  const badWordsHandle = (e) => {
+    let flag = 0;
+    const input = e.target.value.trim().split(" ");
+
+    for (let i = 0; i < swear.length; i++) {
+      for (let j = 0; j < input.length; j++) {
+        if (swear[i] === input[j]) {
+          setBadWordFind(true);
+          flag = 1;
+          break;
+        }
+      }
+    }
+    if (flag === 0) {
+      setBadWordFind(false);
+    }
+  };
   return (
     <div className=" pt-5 bg-cl pb-5 p-2">
       <div className="row justify-content-sm-center pt-5">
@@ -70,15 +111,49 @@ function App() {
                 <strong className="text-danger">*</strong> Name:
               </label>{" "}
               <br />
-              {errors.name && (
+              {/* {errors.name && (
                 <small className="text-danger">{errors.name.message}</small>
+              )} */}
+              {errors.name && (
+                <div className="d-flex position-relative align-items-center justify-content-between">
+                  <small className="text-danger ">{errors.name.message}</small>
+                  <a className="text-xs underline" onClick={toggleHandlerName}>
+                    How to requird fill
+                  </a>
+                  {toggleName ? (
+                    <div className="position-absolute  w-56  bg-info p-2 border rounded mt-5">
+                      <button
+                        className=" btn btn-danger"
+                        onClick={toggleHandlerName}
+                      >
+                        &times;
+                      </button>
+                      <p className="pb-1">
+                        <span className="">Name</span> - must be string, can not
+                        have numbers, can be maximum 30 characters.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Email</span> - must be string, the
+                        structure of the input must match valid email structure,
+                        i.e. user@address.com.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Phone</span> - must be string,
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Message</span> - must be string, at
+                        least 80 characters.
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
               )}
               <input
                 placeholder="Enter your name"
                 type="text"
                 className={`form-control ${errors.name && "invalid"}`}
                 {...register("name", {
-                  required: "Name is Required example:- Asad",
+                  required: "Name is Required",
 
                   maxLength: {
                     value: 30,
@@ -100,19 +175,51 @@ function App() {
                 <strong className="text-danger">*</strong> Email:
               </label>{" "}
               <br />
-              {errors.email && (
+              {/* {errors.email && (
                 <small className="text-danger">{errors.email.message}</small>
+              )} */}
+              {errors.email && (
+                <div className="d-flex position-relative align-items-center justify-content-between">
+                  <small className="text-danger ">{errors.email.message}</small>
+                  <a className="text-xs underline" onClick={toggleHandlerEmail}>
+                    How to requird fill
+                  </a>
+                  {toggleEmail ? (
+                    <div className="position-absolute  w-56  bg-info p-2 border rounded">
+                      <button
+                        className=" btn btn-danger"
+                        onClick={toggleHandlerEmail}
+                      >
+                        &times;
+                      </button>
+                      <p className="pb-1">
+                        <span className="">Name</span> - must be string, can not
+                        have numbers, can be maximum 30 characters.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Email</span> - must be string, the
+                        structure of the input must match valid email structure,
+                        i.e. user@address.com.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Phone</span> - must be string,
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Message</span> - must be string, at
+                        least 80 characters.
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
               )}
               <input
                 type="text"
                 placeholder="Enter your email address"
                 className={`form-control ${errors.email && "invalid"}`}
                 {...register("email", {
-                  required:
-                    "Email is Required example :- abc@gmail.com or abc@bd.info",
+                  required: "Email is Required ",
                   pattern: {
-                    value:
-                      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[com]{3,}|[info]{4,}$/i,
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[com|info]{2,4}$/i,
 
                     message: "Invalid email address",
                   },
@@ -127,16 +234,49 @@ function App() {
                 <strong className="text-danger">*</strong> Mobile Number:
               </label>{" "}
               <br />
-              {errors.phone && (
+              {/* {errors.phone && (
                 <small className="text-danger">{errors.phone.message}</small>
+              )} */}
+              {errors.phone && (
+                <div className="d-flex position-relative align-items-center justify-content-between">
+                  <small className="text-danger ">{errors.phone.message}</small>
+                  <a className="text-xs underline" onClick={toggleHandlerPhone}>
+                    How to requird fill
+                  </a>
+                  {togglePhone ? (
+                    <div className="position-absolute  w-56  bg-info p-2 border rounded">
+                      <button
+                        className=" btn btn-danger"
+                        onClick={toggleHandlerPhone}
+                      >
+                        &times;
+                      </button>
+                      <p className="pb-1">
+                        <span className="">Name</span> - must be string, can not
+                        have numbers, can be maximum 30 characters.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Email</span> - must be string, the
+                        structure of the input must match valid email structure,
+                        i.e. user@address.com.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Phone</span> - must be string,
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Message</span> - must be string, at
+                        least 80 characters.
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
               )}
               <input
                 type="text"
                 placeholder="Enter your bangladesh mobile no."
                 className={`form-control ${errors.phone && "invalid"}`}
                 {...register("phone", {
-                  required:
-                    "Mobile No. is Required example:- +8801921615651 or 01921615651 bangladesh mobile no.",
+                  required: "Mobile No. is Required",
                   pattern: {
                     value: /^(?:\+88|88)?(01[3-9]\d{8})$/,
                     message: "Invalid phone no",
@@ -147,46 +287,99 @@ function App() {
                 }}
               />
             </div>
-    
 
-             <div className="form-group">
+            <div className="form-group">
               <label className="col-form-label">
                 <strong className="text-danger">*</strong> Message:
               </label>{" "}
               <br />
-              {errors.message && (
+              {/* {errors.message && (
                 <small className="text-danger">{errors.message.message}</small>
+              )} */}
+              {errors.message && (
+                <div className="d-flex position-relative align-items-center justify-content-between">
+                  <small className="text-danger ">
+                    {errors.message.message}
+                  </small>
+                  <a
+                    className="text-xs underline"
+                    onClick={toggleHandlerMessage}
+                  >
+                    How to requird fill
+                  </a>
+                  {toggleMessage ? (
+                    <div className="position-absolute  w-56  bg-info p-2 border rounded">
+                      <button
+                        className=" btn btn-danger"
+                        onClick={toggleHandlerMessage}
+                      >
+                        &times;
+                      </button>
+                      <p className="pb-1">
+                        <span className="">Name</span> - must be string, can not
+                        have numbers, can be maximum 30 characters.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Email</span> - must be string, the
+                        structure of the input must match valid email structure,
+                        i.e. user@address.com.
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Phone</span> - must be string,
+                      </p>
+                      <p className="pb-1">
+                        <span className="">Message</span> - must be string, at
+                        least 80 characters.
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
               )}
               <textarea
                 placeholder="Enter your message"
                 className={`form-control ${errors.message && "invalid"}`}
                 {...register("message", {
                   required: "Message is Required at least 80 characters",
-                  
+
                   minLength: {
                     value: 80,
                     message: "Minimum Required length is 80 characters",
                   },
-                  // pattern: {
-                  //   value: /^[a-zA-Z]+([._]?[a-zA-Z]+)*$/,
-                  //   message: "Only (a-z) words are allowed",
-                  // },
+                  onChange: (e) => badWordsHandle(e),
                 })}
                 onKeyUp={() => {
                   trigger("message");
                 }}
-              ></textarea>
-            </div> 
-
-            <div className="d-flex justify-content-center">
-              <input
-                className={`btn btn-secondary my-3 ${isValid && 'btn btn-info'}`}
-                type="submit"
-                value="Submit"
-                disabled={!isValid}
-                onClick={openModal}
               />
+              {badWordFind ? (
+                <div className="d-flex relative align-items-center justify-content-between">
+                  <small className="text-danger">Bad word not supported</small>
+                </div>
+              ) : null}
             </div>
+
+            {badWordFind ? (
+              <div className="d-flex justify-content-center">
+                <input
+                  className="btn btn-secondary my-3 "
+                  type="button"
+                  value="Submit"
+                  disabled
+                />
+              </div>
+            ) : (
+              <div className="d-flex justify-content-center">
+                <input
+                  className={`btn btn-secondary my-3 ${
+                    isValid && "btn btn-info"
+                  }`}
+                  type="submit"
+                  value="Submit"
+                  disabled={!isValid}
+                  // onClick={openModal}
+                />
+              </div>
+            )}
           </form>
         </div>
       </div>
@@ -199,24 +392,12 @@ function App() {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          {data.name ? (
+          {data.name && (
             <div className="">
               <h1 className="pb-5">Thank you {data.name}</h1>{" "}
               <div className=" d-flex justify-content-center">
                 <button className="btn btn-info" onClick={closeModal}>
                   OK
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <strong className="text-danger d-flex justify-content-center">
-                Please fill the required fields
-              </strong>
-              <br />
-              <div className=" d-flex justify-content-center pt-5">
-                <button className="btn btn-danger" onClick={closeModal}>
-                  Close
                 </button>
               </div>
             </div>
