@@ -10,17 +10,18 @@ const customStyles = {
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
-    // height:"100px",
     width: "400px",
     transform: "translate(-50%, -50%)",
     backgroundColor: "lightgray",
   },
 };
 
-let swear = [
-  "arse",
-  "ass",
+
+  // badwords array-----------------------------------
+let oath = [
   "asshole",
+  "ass",
+  "arse",
   "bastard",
   "bitch",
   "bollocks",
@@ -29,6 +30,7 @@ let swear = [
   "crap",
   "damn",
   "frigger",
+  "fuck",
 ];
 
 function App() {
@@ -41,7 +43,6 @@ function App() {
   const {
     register,
     handleSubmit,
-    // watch,
     formState: { errors, isValid },
     reset,
     trigger,
@@ -87,9 +88,9 @@ function App() {
     let flag = 0;
     const input = e.target.value.trim().split(" ");
 
-    for (let i = 0; i < swear.length; i++) {
+    for (let i = 0; i < oath.length; i++) {
       for (let j = 0; j < input.length; j++) {
-        if (swear[i] === input[j]) {
+        if (oath[i] === input[j]) {
           setBadWordFind(true);
           flag = 1;
           break;
@@ -111,14 +112,12 @@ function App() {
                 <strong className="text-danger">*</strong> Name:
               </label>{" "}
               <br />
-              {/* {errors.name && (
-                <small className="text-danger">{errors.name.message}</small>
-              )} */}
+           
               {errors.name && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">{errors.name.message}</small>
-                  <a className="text-xs underline" onClick={toggleHandlerName}>
-                    How to requird fill
+                  <a className="text-xs " onClick={toggleHandlerName}>
+                   See valid syntax
                   </a>
                   {toggleName ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded mt-5">
@@ -129,19 +128,19 @@ function App() {
                         &times;
                       </button>
                       <p className="pb-1">
-                        <span className="">Name</span> - must be string, can not
+                        <span className="">Name</span> - Must be string, can not
                         have numbers, can be maximum 30 characters.
                       </p>
                       <p className="pb-1">
-                        <span className="">Email</span> - must be string, the
-                        structure of the input must match valid email structure,
-                        i.e. user@address.com.
+                        <span className="">Email</span> - Must be string, the
+                        structure of the input Must match valid email structure,
+                        i.e. user@address.com or user@address.info.
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - must be string,
+                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
-                        <span className="">Message</span> - must be string, at
+                        <span className="">Message</span> - Must be string, at
                         least 80 characters.
                       </p>
                     </div>
@@ -175,14 +174,12 @@ function App() {
                 <strong className="text-danger">*</strong> Email:
               </label>{" "}
               <br />
-              {/* {errors.email && (
-                <small className="text-danger">{errors.email.message}</small>
-              )} */}
+          
               {errors.email && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">{errors.email.message}</small>
-                  <a className="text-xs underline" onClick={toggleHandlerEmail}>
-                    How to requird fill
+                  <a className="text-xs " onClick={toggleHandlerEmail}>
+                   See valid syntax
                   </a>
                   {toggleEmail ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded">
@@ -193,19 +190,19 @@ function App() {
                         &times;
                       </button>
                       <p className="pb-1">
-                        <span className="">Name</span> - must be string, can not
+                        <span className="">Name</span> - Must be string, can not
                         have numbers, can be maximum 30 characters.
                       </p>
                       <p className="pb-1">
-                        <span className="">Email</span> - must be string, the
-                        structure of the input must match valid email structure,
-                        i.e. user@address.com.
+                        <span className="">Email</span> - Must be string, the
+                        structure of the input Must match valid email structure,
+                        i.e. user@address.com or user@address.info .
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - must be string,
+                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
-                        <span className="">Message</span> - must be string, at
+                        <span className="">Message</span> - Must be string, at
                         least 80 characters.
                       </p>
                     </div>
@@ -234,14 +231,12 @@ function App() {
                 <strong className="text-danger">*</strong> Mobile Number:
               </label>{" "}
               <br />
-              {/* {errors.phone && (
-                <small className="text-danger">{errors.phone.message}</small>
-              )} */}
+       
               {errors.phone && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">{errors.phone.message}</small>
-                  <a className="text-xs underline" onClick={toggleHandlerPhone}>
-                    How to requird fill
+                  <a className="text-xs " onClick={toggleHandlerPhone}>
+                   See valid syntax
                   </a>
                   {togglePhone ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded">
@@ -252,19 +247,19 @@ function App() {
                         &times;
                       </button>
                       <p className="pb-1">
-                        <span className="">Name</span> - must be string, can not
+                        <span className="">Name</span> - Must be string, can not
                         have numbers, can be maximum 30 characters.
                       </p>
                       <p className="pb-1">
-                        <span className="">Email</span> - must be string, the
-                        structure of the input must match valid email structure,
-                        i.e. user@address.com.
+                        <span className="">Email</span> - Must be string, the
+                        structure of the input Must match valid email structure,
+                        i.e. user@address.com or user@address.info.
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - must be string,
+                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
-                        <span className="">Message</span> - must be string, at
+                        <span className="">Message</span> - Must be string, at
                         least 80 characters.
                       </p>
                     </div>
@@ -293,19 +288,17 @@ function App() {
                 <strong className="text-danger">*</strong> Message:
               </label>{" "}
               <br />
-              {/* {errors.message && (
-                <small className="text-danger">{errors.message.message}</small>
-              )} */}
+          
               {errors.message && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">
                     {errors.message.message}
                   </small>
                   <a
-                    className="text-xs underline"
+                    className="text-xs "
                     onClick={toggleHandlerMessage}
                   >
-                    How to requird fill
+                   See valid syntax
                   </a>
                   {toggleMessage ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded">
@@ -316,19 +309,19 @@ function App() {
                         &times;
                       </button>
                       <p className="pb-1">
-                        <span className="">Name</span> - must be string, can not
+                        <span className="">Name</span> - Must be string, can not
                         have numbers, can be maximum 30 characters.
                       </p>
                       <p className="pb-1">
-                        <span className="">Email</span> - must be string, the
-                        structure of the input must match valid email structure,
-                        i.e. user@address.com.
+                        <span className="">Email</span> - Must be string, the
+                        structure of the input Must match valid email structure,
+                        i.e. user@address.com or user@address.info.
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - must be string,
+                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
-                        <span className="">Message</span> - must be string, at
+                        <span className="">Message</span> - Must be string, at
                         least 80 characters.
                       </p>
                     </div>
@@ -353,7 +346,7 @@ function App() {
               />
               {badWordFind ? (
                 <div className="d-flex relative align-items-center justify-content-between">
-                  <small className="text-danger">Bad word not supported</small>
+                  <small className="text-danger">Bad words not supported</small>
                 </div>
               ) : null}
             </div>
