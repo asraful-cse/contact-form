@@ -16,8 +16,7 @@ const customStyles = {
   },
 };
 
-
-  // badwords array-----------------------------------
+// badwords array-----------------------------------
 let oath = [
   "asshole",
   "ass",
@@ -112,12 +111,11 @@ function App() {
                 <strong className="text-danger">*</strong> Name:
               </label>{" "}
               <br />
-           
               {errors.name && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">{errors.name.message}</small>
                   <a className="text-xs " onClick={toggleHandlerName}>
-                   See valid syntax
+                    See valid syntax
                   </a>
                   {toggleName ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded mt-5">
@@ -137,7 +135,9 @@ function App() {
                         i.e. user@address.com or user@address.info.
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
+                        <span className="">Phone</span> - Follow Bangladeshi
+                        phone number, should be accepted with or without the
+                        country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
                         <span className="">Message</span> - Must be string, at
@@ -159,7 +159,7 @@ function App() {
                     message: "Maximum allowed length is 30 words",
                   },
                   pattern: {
-                    value: /^[a-zA-Z]+([._]?[a-zA-Z]+)*$/,
+                    value: /^[a-zA-Z ]+([" "]?[a-zA-Z]+)*$/,
                     message: "Only (a-z) words are allowed",
                   },
                 })}
@@ -174,12 +174,11 @@ function App() {
                 <strong className="text-danger">*</strong> Email:
               </label>{" "}
               <br />
-          
               {errors.email && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">{errors.email.message}</small>
                   <a className="text-xs " onClick={toggleHandlerEmail}>
-                   See valid syntax
+                    See valid syntax
                   </a>
                   {toggleEmail ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded">
@@ -199,7 +198,9 @@ function App() {
                         i.e. user@address.com or user@address.info .
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
+                        <span className="">Phone</span> - Follow Bangladeshi
+                        phone number, should be accepted with or without the
+                        country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
                         <span className="">Message</span> - Must be string, at
@@ -231,12 +232,11 @@ function App() {
                 <strong className="text-danger">*</strong> Mobile Number:
               </label>{" "}
               <br />
-       
               {errors.phone && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">{errors.phone.message}</small>
                   <a className="text-xs " onClick={toggleHandlerPhone}>
-                   See valid syntax
+                    See valid syntax
                   </a>
                   {togglePhone ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded">
@@ -256,7 +256,9 @@ function App() {
                         i.e. user@address.com or user@address.info.
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
+                        <span className="">Phone</span> - Follow Bangladeshi
+                        phone number, should be accepted with or without the
+                        country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
                         <span className="">Message</span> - Must be string, at
@@ -288,17 +290,13 @@ function App() {
                 <strong className="text-danger">*</strong> Message:
               </label>{" "}
               <br />
-          
               {errors.message && (
                 <div className="d-flex position-relative align-items-center justify-content-between">
                   <small className="text-danger ">
                     {errors.message.message}
                   </small>
-                  <a
-                    className="text-xs "
-                    onClick={toggleHandlerMessage}
-                  >
-                   See valid syntax
+                  <a className="text-xs " onClick={toggleHandlerMessage}>
+                    See valid syntax
                   </a>
                   {toggleMessage ? (
                     <div className="position-absolute  w-56  bg-info p-2 border rounded">
@@ -318,7 +316,9 @@ function App() {
                         i.e. user@address.com or user@address.info.
                       </p>
                       <p className="pb-1">
-                        <span className="">Phone</span> - Follow Bangladeshi phone number, should be accepted with or without the country code, i.e +8801921615651 .
+                        <span className="">Phone</span> - Follow Bangladeshi
+                        phone number, should be accepted with or without the
+                        country code, i.e +8801921615651 .
                       </p>
                       <p className="pb-1">
                         <span className="">Message</span> - Must be string, at
